@@ -375,6 +375,7 @@ def create_db_tables():
         db.create_all()
         print("Database tables created.")
 
+create_db_tables()
 
 # Custom Jinja2 filter to format numbers
 def format_number(value):
@@ -2049,7 +2050,6 @@ def insert_barangays():
         
 with app.app_context():
         initialize_rchu_account()
-        create_db_tables()
         
 if __name__ == '__main__':
     app.run(debug=True)
