@@ -21,10 +21,10 @@ app = Flask(__name__, static_folder='static')
 UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-DATABASE_URL = os.getenv("postgresql://mmis_thesis_db_user:t1HaltzdJbFi6VuvTB1pMZTItDzIKL8g@dpg-csovv823esus73cdmvjg-a.singapore-postgres.render.com/mmis_thesis_db")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 app.config['SECRET_KEY'] = '4046bde895cc19ca9cbd373a'
-app.config['SQLALCHEMY_DATABASE_URI'] = postgresql://mmis_thesis_db_user:t1HaltzdJbFi6VuvTB1pMZTItDzIKL8g@dpg-csovv823esus73cdmvjg-a.singapore-postgres.render.com/mmis_thesis_db
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['UPLOAD_FOLDER'] = 'static/images'
