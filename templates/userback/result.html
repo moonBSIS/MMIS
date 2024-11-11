@@ -1,0 +1,7 @@
+{% extends "user/layout.html" %} {% block content %}
+<div class="container mt-4">
+  <h2>Prediction Result</h2>
+  <p>The child is: <strong>{{ result }}</strong></p>
+  <a href="/user/predict" class="btn btn-primary">Make Another Prediction</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,88 @@
+{% extends "user/layout2.html" %} {% block content %}
+<div class="container mt-4">
+  <h2>Prediction Results</h2>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Child's Name</th>
+        <th>Mother's Name</th>
+        <th>Age of Child (months)</th>
+        <th>Sex</th>
+        <th>Vitamin A</th>
+        <th>Birth Order</th>
+        <th>Breastfeeding</th>
+        <th>Comorbidity Status</th>
+        <th>Type of Birth</th>
+        <th>Size at Birth</th>
+        <th>Dietary Diversity Score</th>
+        <th>Mother's Age (years)</th>
+        <th>Residence</th>
+        <th>Mother's Education Level</th>
+        <th>Father's Education Level</th>
+        <th>Women's Autonomy Tertiles</th>
+        <th>Toilet Facility</th>
+        <th>Source of Drinking Water</th>
+        <th>BMI of Mother</th>
+        <th>Number of Children Under Five</th>
+        <th>Media Exposure</th>
+        <th>Mother's Working Status</th>
+        <th>Household Size</th>
+        <th>Wealth Quantile</th>
+        <th>Prediction Result</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for prediction in predictions %}
+      <tr>
+        <td>{{ prediction.address }}</td>
+        <td>{{ prediction.child_name }}</td>
+        <td>{{ prediction.mother_name }}</td>
+        <td>{{ prediction.age }}</td>
+        <td>{{ prediction.sex }}</td>
+        <td>{{ prediction.vitamin_a }}</td>
+        <td>{{ prediction.birth_order }}</td>
+        <td>{{ prediction.breastfeeding }}</td>
+        <td>{{ prediction.comorbidity_status }}</td>
+        <td>{{ prediction.type_of_birth }}</td>
+        <td>{{ prediction.size_at_birth }}</td>
+        <td>{{ prediction.dietary_diversity_score }}</td>
+        <td>{{ prediction.mothers_age }}</td>
+        <td>{{ prediction.residence }}</td>
+        <td>{{ prediction.mothers_education_level }}</td>
+        <td>{{ prediction.fathers_education_level }}</td>
+        <td>{{ prediction.womens_autonomy_tertiles }}</td>
+        <td>{{ prediction.toilet_facility }}</td>
+        <td>{{ prediction.drinking_water_source }}</td>
+        <td>{{ prediction.bmi_of_mother }}</td>
+        <td>{{ prediction.number_of_children_under_five }}</td>
+        <td>{{ prediction.media_exposure }}</td>
+        <td>{{ prediction.mothers_working_status }}</td>
+        <td>{{ prediction.household_size }}</td>
+        <td>{{ prediction.wealth_quantile }}</td>
+        <td>{{ prediction.prediction_result }}</td>
+        <td>
+          <form
+            method="POST"
+            action="{{ url_for('delete_prediction', prediction_id=prediction.id) }}"
+          >
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+          <a
+            href="{{ url_for('download_excel', prediction_id=prediction.id) }}"
+            class="btn btn-success btn-sm mt-1"
+            >Download Excel</a
+          >
+          <a
+            href="{{ url_for('download_pdf', prediction_id=prediction.id) }}"
+            class="btn btn-primary btn-sm mt-1"
+            >Download PDF</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

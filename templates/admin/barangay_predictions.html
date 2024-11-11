@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barangay Predictions</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/home2.css') }}"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+      }
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .btn-view {
+        background-color: #4caf50;
+        color: #fff;
+      }
+      .btn-view:hover {
+        background-color: #45a049;
+      }
+      .btn-delete {
+        background-color: #f44336;
+        color: #fff;
+      }
+      .btn-delete:hover {
+        background-color: #e53935;
+      }
+      .search-bar {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .search-input {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      /* Dark mode styles */
+      body.dark-mode {
+        background-color: #121212;
+        color: #e0e0e0;
+      }
+      body.dark-mode .container {
+        background-color: #1e1e1e;
+        border-color: #333;
+      }
+      body.dark-mode table {
+        border-color: #333;
+      }
+      body.dark-mode th {
+        background-color: #333;
+        color: #e0e0e0;
+      }
+      body.dark-mode td {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+      }
+      .toggle-dark-mode {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #4caf50;
+        color: #ffffff;
+        border-radius: 50%;
+        padding: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .toggle-dark-mode i {
+        font-size: 24px;
+      }
+      body.dark-mode .toggle-dark-mode {
+        background-color: #ffa500;
+      }
+      body.dark-mode .toggle-dark-mode:hover {
+        background-color: #ff8c00;
+      }
+      h1.toggle-dark-mode {
+        color: #fff;
+      }
+      body.dark-mode h1 {
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <i class="bx bx-menu menu-icon"></i>
+        <span class="logo-name"
+          >Malnutrition Monitoring and Intervention System</span
+        >
+      </div>
+      <div class="sidebar">
+        <div class="logo">
+          <i class="bx bx-menu menu-icon"></i>
+          <span class="logname">MMIS</span>
+        </div>
+        <div class="sidebar-content">
+          <ul class="lists">
+            <li class="list">
+              <a href="{{ url_for('adminDashboard') }}" class="nav-link">
+                <i class="bx bx-home-alt icon"></i>
+                <span class="link">Dashboard</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="{{ url_for('adminUserBarangays') }}" class="nav-link">
+                <i class="bx bx-user-circle icon"></i>
+                <span class="link">User Profiles</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="{{ url_for('adminBarangays') }}" class="nav-link active">
+                <i class="bx bx-bar-chart-alt-2 icon"></i>
+                <span class="link">View Predictions</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="{{ url_for('adminLogout') }}" class="nav-link">
+                <i class="bx bx-log-out icon"></i>
+                <span class="link">Log out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="overlay"></section>
+
+    <div class="container">
+      <h1>Barangay Predictions for {{ barangay }}</h1>
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          onkeyup="searchTable()"
+          placeholder="Search for names.."
+        />
+      </div>
+      <table id="predictionsTable">
+        <thead>
+          <tr>
+            <th>Mother's Full Name</th>
+            <th>Child's Name</th>
+            <th>Age (months)</th>
+            <th>Sex</th>
+            <th>Prediction Result</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for prediction in predictions %}
+          <tr>
+            <td>
+              {{ prediction.mother_first_name }} {{ prediction.mother_last_name
+              }}
+            </td>
+            <td>
+              {{ prediction.child_first_name }} {{ prediction.child_last_name }}
+            </td>
+            <td>{{ prediction.age }}</td>
+            <td>{{ prediction.sex }}</td>
+            <td>{{ prediction.prediction_result }}</td>
+            <td>
+              <div class="action-buttons">
+                <a
+                  href="{{ url_for('adminViewResultsButton', prediction_id=prediction.id) }}"
+                  class="btn btn-view"
+                  >View Results</a
+                >
+                <form
+                  action="{{ url_for('deletePrediction', prediction_id=prediction.id) }}"
+                  method="post"
+                  style="display: inline"
+                >
+                  <button type="submit" class="btn btn-delete">Delete</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="toggle-dark-mode">
+      <i class="bx bx-moon"></i>
+    </div>
+
+    <script>
+      const navBar = document.querySelector("nav"),
+        menuBtns = document.querySelectorAll(".menu-icon"),
+        overlay = document.querySelector(".overlay"),
+        submenuToggles = document.querySelectorAll(".submenu-toggle"),
+        toggleDarkModeBtn = document.querySelector(".toggle-dark-mode"),
+        toggleDarkModeIcon = toggleDarkModeBtn.querySelector("i");
+
+      menuBtns.forEach((menuBtn) => {
+        menuBtn.addEventListener("click", () => {
+          navBar.classList.toggle("open");
+        });
+      });
+
+      overlay.addEventListener("click", () => {
+        navBar.classList.remove("open");
+      });
+
+      submenuToggles.forEach((toggle) => {
+        toggle.addEventListener("click", (e) => {
+          e.preventDefault();
+          const submenu = toggle.nextElementSibling;
+          submenu.classList.toggle("open");
+          toggle.querySelector(".arrow").classList.toggle("open");
+        });
+      });
+
+      function searchTable() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const table = document.getElementById("predictionsTable");
+        const tr = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < tr.length; i++) {
+          let td = tr[i].getElementsByTagName("td");
+          let showRow = false;
+
+          for (let j = 0; j < td.length - 1; j++) {
+            if (td[j] && td[j].textContent.toLowerCase().indexOf(filter) > -1) {
+              showRow = true;
+              break;
+            }
+          }
+
+          tr[i].style.display = showRow ? "" : "none";
+        }
+      }
+
+      function setDarkMode(isDark) {
+        if (isDark) {
+          document.body.classList.add("dark-mode");
+          navBar.classList.add("dark-mode");
+          document.querySelector(".container").classList.add("dark-mode");
+          localStorage.setItem("darkMode", "true");
+          toggleDarkModeIcon.classList.replace("bx-moon", "bx-sun");
+        } else {
+          document.body.classList.remove("dark-mode");
+          navBar.classList.remove("dark-mode");
+          document.querySelector(".container").classList.remove("dark-mode");
+          localStorage.setItem("darkMode", "false");
+          toggleDarkModeIcon.classList.replace("bx-sun", "bx-moon");
+        }
+      }
+
+      toggleDarkModeBtn.addEventListener("click", () => {
+        const isDark = document.body.classList.contains("dark-mode");
+        setDarkMode(!isDark);
+      });
+
+      // Initialize dark mode based on user's preference
+      if (localStorage.getItem("darkMode") === "true") {
+        setDarkMode(true);
+      }
+    </script>
+  </body>
+</html>

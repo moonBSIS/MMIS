@@ -1,0 +1,83 @@
+<!-- add_child.html -->
+{% extends "user/layout.html" %} {% block content %}
+<div class="container">
+  <h1 class="text-center my-3">Child Information</h1>
+  <div class="row d-flex justify-content-center">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+      {% with messages=get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        <strong>{{ message }}</strong>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+      <div class="card">
+        <div class="card-body">
+          <!-- Use WTForms for rendering the form -->
+          <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="my-2">
+              <label for="first_name"><b>First Name</b></label>
+              {{ form.first_name(class="form-control my-1", id="first_name") }}
+            </div>
+            <div class="my-2">
+              <label for="last_name"><b>Last Name</b></label>
+              {{ form.last_name(class="form-control my-1", id="last_name") }}
+            </div>
+            <div class="my-2">
+              <label for="age"><b>Age (months)</b></label>
+              {{ form.age(class="form-control my-1", id="age") }}
+            </div>
+            <div class="my-2">
+              <label for="sex"><b>Sex</b></label>
+              {{ form.sex(class="form-control my-1", id="sex") }}
+            </div>
+            <div class="my-2">
+              <label for="vitamin_a"><b>Vitamin A</b></label>
+              {{ form.vitamin_a(class="form-control my-1", id="vitamin_a") }}
+            </div>
+            <div class="my-2">
+              <label for="birth_order"><b>Birth Order</b></label>
+              {{ form.birth_order(class="form-control my-1", id="birth_order")
+              }}
+            </div>
+            <div class="my-2">
+              <label for="breastfeeding"><b>Breastfeeding</b></label>
+              {{ form.breastfeeding(class="form-control my-1",
+              id="breastfeeding") }}
+            </div>
+            <div class="my-2">
+              <label for="comorbidity_status"
+                ><b>Child Comorbidity Status </b>(Presence of Diarrhea, Fever
+                ALRI in Last 2 weeks before the suvey)</label
+              >
+              {{ form.comorbidity_status(class="form-control my-1",
+              id="comorbidity_status") }}
+            </div>
+            <div class="my-2">
+              <label for="type_of_birth"><b>Type of Birth</b></label>
+              {{ form.type_of_birth(class="form-control my-1",
+              id="type_of_birth") }}
+            </div>
+            <div class="my-2">
+              <label for="size_at_birth"
+                ><b>Size of the Child at Birth</b></label
+              >
+              {{ form.size_at_birth(class="form-control my-1",
+              id="size_at_birth") }}
+            </div>
+            <div class="my-2">
+              <label for="dietary_diversity_score"
+                ><b>Dietary Diversity Score</b></label
+              >
+              {{ form.dietary_diversity_score(class="form-control my-1",
+              id="dietary_diversity_score") }}
+            </div>
+            <button type="submit" class="btn btn-success my-2">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+{% endblock content %}

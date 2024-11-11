@@ -1,0 +1,62 @@
+<!-- view_household.html -->
+{% extends "/user/layout.html" %} {% block content %}
+<div class="container my-4">
+  <div class="row">
+    <div class="col">
+      <h1>Household Information</h1>
+      {% if household %}
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Mother's Age</th>
+            <th>Residence</th>
+            <th>Mother's Education Level</th>
+            <th>Father's Education Level</th>
+            <th>Women's Autonomy Tertiles</th>
+            <th>Toilet Facility</th>
+            <th>Source of Drinking Water</th>
+            <th>BMI of Mother</th>
+            <th>Number of Children Under Five</th>
+            <th>Media Exposure</th>
+            <th>Mother's Working Status</th>
+            <th>Household Size</th>
+            <th>Wealth Quantile</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ household.mothers_age }}</td>
+            <td>{{ household.residence }}</td>
+            <td>{{ household.mothers_education_level }}</td>
+            <td>{{ household.fathers_education_level }}</td>
+            <td>{{ household.womens_autonomy_tertiles }}</td>
+            <td>{{ household.toilet_facility }}</td>
+            <td>{{ household.drinking_water_source }}</td>
+            <td>{{ household.bmi_of_mother }}</td>
+            <td>{{ household.number_of_children_under_five }}</td>
+            <td>{{ household.media_exposure }}</td>
+            <td>{{ household.mothers_working_status }}</td>
+            <td>{{ household.household_size }}</td>
+            <td>{{ household.wealth_quantile }}</td>
+            <td>
+              <form
+                action="{{ url_for('delete_household', household_id=household.id) }}"
+                method="POST"
+                style="display: inline"
+              >
+                <button type="submit" class="btn btn-danger btn-sm">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {% else %}
+      <p>No household information found.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

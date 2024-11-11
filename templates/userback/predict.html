@@ -1,0 +1,104 @@
+<!-- predict.html -->
+{% extends "user/layout2.html" %} {% from "bootstrap/wtf.html" import quick_form
+%} {% block content %}
+<div class="container mt-4">
+  <h2>Predict Child Malnutrition</h2>
+  <form method="POST" action="{{ url_for('predict') }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group mt-1">
+      {{ form.address.label }} {{ form.address(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.child_name.label }} {{ form.child_name(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.age.label }} {{ form.age(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.sex.label }} {{ form.sex(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.vitamin_a.label }} {{ form.vitamin_a(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.birth_order.label }} {{ form.birth_order(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.breastfeeding.label }} {{
+      form.breastfeeding(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.comorbidity_status.label }} {{
+      form.comorbidity_status(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.type_of_birth.label }} {{
+      form.type_of_birth(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.size_at_birth.label }} {{
+      form.size_at_birth(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.dietary_diversity_score.label }} {{
+      form.dietary_diversity_score(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.mother_name.label }} {{ form.mother_name(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.mothers_age.label }} {{ form.mothers_age(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.residence.label }} {{ form.residence(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.mothers_education_level.label }} {{
+      form.mothers_education_level(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.fathers_education_level.label }} {{
+      form.fathers_education_level(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.womens_autonomy_tertiles.label }} {{
+      form.womens_autonomy_tertiles(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.toilet_facility.label }} {{
+      form.toilet_facility(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.drinking_water_source.label }} {{
+      form.drinking_water_source(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.bmi_of_mother.label }} {{
+      form.bmi_of_mother(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.number_of_children_under_five.label }} {{
+      form.number_of_children_under_five(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.media_exposure.label }} {{
+      form.media_exposure(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.mothers_working_status.label }} {{
+      form.mothers_working_status(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.household_size.label }} {{
+      form.household_size(class_='form-control') }}
+    </div>
+    <div class="form-group mt-1">
+      {{ form.wealth_quantile.label }} {{
+      form.wealth_quantile(class_='form-control') }}
+    </div>
+    <div class="form-group mt-3">
+      {{ form.submit(class_='btn btn-primary') }}
+    </div>
+  </form>
+</div>
+{% endblock content %}

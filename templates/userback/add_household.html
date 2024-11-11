@@ -1,0 +1,89 @@
+<!-- add_household.html -->
+{% extends "user/layout.html" %} {% block content %}
+<div class="container my-4">
+  <h1 class="text-center my-3">Add Household Information</h1>
+  <div class="row d-flex justify-content-center">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+      {% with messages=get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        <strong>{{ message }}</strong>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+      <div class="card">
+        <div class="card-body">
+          <form method="POST" action="{{ url_for('add_household') }}">
+            {{ form.hidden_tag() }}
+            <div class="my-2">
+              <label for="mothers_age"><b>Mother's Age</b></label>
+              {{ form.mothers_age(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="residence"><b>Residence</b></label>
+              {{ form.residence(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="mothers_education_level"
+                ><b>Mother's Education Level</b></label
+              >
+              {{ form.mothers_education_level(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="fathers_education_level"
+                ><b>Father's Education Level</b></label
+              >
+              {{ form.fathers_education_level(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="womens_autonomy_tertiles"
+                ><b>Women's Autonomy Tertiles</b></label
+              >
+              {{ form.womens_autonomy_tertiles(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="toilet_facility"><b>Toilet Facility</b></label>
+              {{ form.toilet_facility(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="drinking_water_source"
+                ><b>Source of Drinking Water</b></label
+              >
+              {{ form.drinking_water_source(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="bmi_of_mother"><b>BMI of Mother</b></label>
+              {{ form.bmi_of_mother(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="number_of_children_under_five"
+                ><b>Number of Children Under Five</b></label
+              >
+              {{ form.number_of_children_under_five(class="form-control my-1")
+              }}
+            </div>
+            <div class="my-2">
+              <label for="media_exposure"><b>Media Exposure</b></label>
+              {{ form.media_exposure(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="mothers_working_status"
+                ><b>Mother's Working Status</b></label
+              >
+              {{ form.mothers_working_status(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="household_size"><b>Household Size</b></label>
+              {{ form.household_size(class="form-control my-1") }}
+            </div>
+            <div class="my-2">
+              <label for="wealth_quantile"><b>Wealth Quantile</b></label>
+              {{ form.wealth_quantile(class="form-control my-1") }}
+            </div>
+            <button type="submit" class="btn btn-success my-2">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

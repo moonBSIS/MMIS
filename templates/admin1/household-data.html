@@ -1,0 +1,47 @@
+{% extends "admin1/layout.html" %} {% block content %}
+<div class="container mt-4">
+  <h2>Household Data</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Mother's Age</th>
+        <th>Residence</th>
+        <th>Mother's Education Level</th>
+        <th>Father's Education Level</th>
+        <th>Women's Autonomy Tertiles</th>
+        <th>Toilet Facility</th>
+        <th>Drinking Water Source</th>
+        <th>BMI of Mother</th>
+        <th>Number of Children Under Five</th>
+        <th>Media Exposure</th>
+        <th>Mother's Working Status</th>
+        <th>Household Size</th>
+        <th>Wealth Quantile</th>
+        <th>Parent ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for household in households %}
+      <tr>
+        <td>{{ household.id }}</td>
+        <td>{{ household.mothers_age }}</td>
+        <td>{{ household.residence }}</td>
+        <td>{{ household.mothers_education_level }}</td>
+        <td>{{ household.fathers_education_level }}</td>
+        <td>{{ household.womens_autonomy_tertiles }}</td>
+        <td>{{ household.toilet_facility }}</td>
+        <td>{{ household.drinking_water_source }}</td>
+        <td>{{ household.bmi_of_mother }}</td>
+        <td>{{ household.number_of_children_under_five }}</td>
+        <td>{{ household.media_exposure }}</td>
+        <td>{{ household.mothers_working_status }}</td>
+        <td>{{ household.household_size }}</td>
+        <td>{{ household.wealth_quantile }}</td>
+        <td>{{ household.parent_id }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends "/admin/layout.html" %} {% block content %}
+<div class="container mt-4">
+  <h2>Child Data</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Parent ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Sex</th>
+        <th>Vitamin A</th>
+        <th>Birth Order</th>
+        <th>Breastfeeding</th>
+        <th>Comorbidity Status</th>
+        <th>Type of Birth</th>
+        <th>Size at Birth</th>
+        <th>Dietary Diversity Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for child in children %}
+      <tr>
+        <td>{{ child.id }}</td>
+        <td>{{ child.parent_id }}</td>
+        <td>{{ child.first_name }}</td>
+        <td>{{ child.last_name }}</td>
+        <td>{{ child.age }}</td>
+        <td>{{ child.sex }}</td>
+        <td>{{ child.vitamin_a }}</td>
+        <td>{{ child.birth_order }}</td>
+        <td>{{ child.breastfeeding }}</td>
+        <td>{{ child.comorbidity_status }}</td>
+        <td>{{ child.type_of_birth }}</td>
+        <td>{{ child.size_at_birth }}</td>
+        <td>{{ child.dietary_diversity_score }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

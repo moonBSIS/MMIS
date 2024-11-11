@@ -1,0 +1,23 @@
+{% extends "user/layout.html" %}
+
+{% block content %}
+<div class="container my-2">
+{% include "user/navbar.html" %}
+    <h1>{{ title }}</h1>
+    {% if report_data.error %}
+        <p>{{ report_data.error }}</p>
+    {% else %}
+        <h2>Summary</h2>
+        <p>Total Children: {{ report_data.total_children }}</p>
+        <p>Malnutrition Cases: {{ report_data.malnutrition_cases }}</p>
+
+        <h2>Visualizations</h2>
+        <div id="weight-by-age">
+            {{ report_data.visualizations.weight_by_age | safe }}
+        </div>
+        <div id="malnutrition-status-dist">
+            {{ report_data.visualizations.malnutrition_status_dist | safe }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

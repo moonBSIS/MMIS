@@ -1,0 +1,90 @@
+{% extends "user/layout.html" %} {% block content %}
+<div class="container">
+  <h1 class="text-center my-3">Child Information</h1>
+  <div class="row d-flex justify-content-center">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+      {% with messages=get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        <strong>{{ message }}</strong>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+      <div class="card">
+        <div class="card-body">
+          <!-- The action needs to point to the URL that handles this form submission -->
+          <form
+            action="{{ url_for('add_child') }}"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <div class="my-2">
+              <label for="first_name"><b>Firstname</b></label>
+              <input
+                type="text"
+                name="first_name"
+                id="first_name"
+                class="form-control my-1"
+                required
+                placeholder="Firstname"
+              />
+            </div>
+            <div class="my-2">
+              <label for="last_name"><b>Lastname</b></label>
+              <input
+                type="text"
+                name="last_name"
+                id="last_name"
+                class="form-control my-1"
+                required
+                placeholder="Lastname"
+              />
+            </div>
+            <div class="my-2">
+              <label for="age"><b>Age (months)</b></label>
+              <input
+                type="number"
+                name="age"
+                id="age"
+                required
+                class="form-control my-1"
+                placeholder="Age (months)"
+              />
+            </div>
+            <div class="my-2">
+              <label for="age"><b>Height (cm)</b></label>
+              <input
+                type="number"
+                name="height"
+                id="height"
+                required
+                class="form-control my-1"
+                placeholder="Height (cm)"
+              />
+            </div>
+            <div class="my-2">
+              <label for="age"><b>Weight (kg)</b></label>
+              <input
+                type="number"
+                name="weight"
+                id="weight"
+                required
+                class="form-control my-1"
+                placeholder="Weight (kg)"
+              />
+            </div>
+            <div class="my-2">
+              <label for="sex"><b>Sex</b></label>
+              <select name="sex" id="sex">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-success my-2">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+{% endblock content %}

@@ -1,0 +1,43 @@
+<!-- rchu/predictions.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Predictions for {{ barangay }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/home2.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Prediction Results for {{ barangay }}</h1>
+
+      {% if prediction_data %}
+      <table class="prediction-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Data</th>
+            <!-- Add other relevant headers if needed -->
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in prediction_data %}
+          <tr>
+            <td>{{ data.date }}</td>
+            <td>{{ data.data }}</td>
+            <!-- Add other data fields if available -->
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No prediction data available for {{ barangay }}.</p>
+      {% endif %}
+
+      <a href="{{ url_for('rchuBarangays') }}">Back to Barangays</a>
+    </div>
+  </body>
+</html>

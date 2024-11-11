@@ -1,0 +1,29 @@
+{% extends "user/layout.html" %} {% block content %}
+<div class="container mt-4">
+  <h2>User Profile</h2>
+  <div class="card">
+    <div class="card-header">
+      <h3>{{ users.fname }} {{ users.lname }}</h3>
+    </div>
+    <div class="card-body">
+      <p><strong>Email:</strong> {{ users.email }}</p>
+      <p><strong>Birthday:</strong> {{ users.pbday }}</p>
+      <p><strong>Phone Number:</strong> {{ users.pnumber }}</p>
+      <p><strong>Education:</strong> {{ users.edu }}</p>
+      <p><strong>Username:</strong> {{ users.username }}</p>
+      <p>
+        <strong>Status:</strong> {{ 'Approved' if users.status == 1 else
+        'Pending Approval' }}
+      </p>
+      {% if users.profile_picture %}
+      <p><strong>Profile Picture:</strong></p>
+      <img
+        src="data:image/png;base64,{{ users.profile_picture }}"
+        alt="Profile Picture"
+        style="max-width: 200px"
+      />
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

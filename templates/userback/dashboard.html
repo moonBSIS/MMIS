@@ -1,0 +1,7 @@
+{% extends "user/layout.html" %} {% block content %}
+<div class="container mt-4">
+  <h2>User Dashboard</h2>
+  <h3>Logistic Regression Coefficients</h3>
+  <img src="data:image/png;base64,{{ plot_url }}" alt="Graph" />
+</div>
+{% endblock content %}

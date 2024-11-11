@@ -1,0 +1,60 @@
+<!-- templates/user/view_child.html -->
+{% extends "/user/layout.html" %} {% block content %}
+<div class="container my-4">
+  <div class="row">
+    <div class="col">
+      <h1>Children Information</h1>
+      {% if children %}
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Sex</th>
+            <th>Age (months)</th>
+            <th>Vitamin A</th>
+            <th>Birth Order</th>
+            <th>Breastfeeding</th>
+            <th>Comorbidity Status</th>
+            <th>Type of Birth</th>
+            <th>Size at Birth</th>
+            <th>Dietary Diversity Score</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for child in children %}
+          <tr>
+            <td>{{ child.first_name }}</td>
+            <td>{{ child.last_name }}</td>
+            <td>{{ child.sex }}</td>
+            <td>{{ child.age }} months</td>
+            <td>{{ child.vitamin_a }}</td>
+            <td>{{ child.birth_order }}</td>
+            <td>{{ child.breastfeeding }}</td>
+            <td>{{ child.comorbidity_status }}</td>
+            <td>{{ child.type_of_birth }}</td>
+            <td>{{ child.size_at_birth }}</td>
+            <td>{{ child.dietary_diversity_score }}</td>
+            <td>
+              <form
+                action="{{ url_for('delete_child', child_id=child.id) }}"
+                method="POST"
+                style="display: inline"
+              >
+                <button type="submit" class="btn btn-danger btn-sm">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No children information found.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
